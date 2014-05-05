@@ -18,6 +18,8 @@
 
 #Auto-detecting Source Files from current folder and all sub-folders:
 
+paramsp =
+
 SRC = $(shell find ./ -name "*.c")
 
 OBJ = $(SRC:.c=.o)
@@ -61,29 +63,29 @@ endif
 again: clean all
 
 run:
-	./$(bin)$(executable_name)
+	./$(bin)$(executable_name) $(p)
 
 version:
 	@echo ---------------------Makefile 2.1 By Ariel Baruch-------------------------
 
 vg:
-	valgrind --leak-check=yes ./$(bin)$(executable_name)
+	valgrind --leak-check=yes ./$(bin)$(executable_name) $(p)
 
 help: version
 	@echo '\n' \
-	Auto detecting .c files in current folder and sub-folders and compiling	'\n' \
+	Auto detecting .c files in current folder and sub-folders and compiling 			'\n' \
 	Usage: make [function] '\n' '\n' \
 	functions '\n' \
-	'\t' make run'\n' \
-	'\t' '\t' running the compilied executable file created with [parameters] '\n' \
-	'\t' '\t' e.g: make run := ./executable  '\n' \
-	'\t' make vg'\n' \
-	'\t' '\t' running with valgrind leak--check=yes '\n' \
-	'\t' '\t' e.g: make vg := valgrind --leak-check=yes ./executable '\n'\
-	'\t' make again: '\n' \
+	'\t' make run p=[params]'\n' \
+	'\t' '\t' running the compilied executable file created with [parameters] \
+	'\t' '\t' e.g: make run -args1 -p out := exe -arg1 -p out '\n''\n' \
+	'\t' make vg p=[params]'\n' \
+	'\t' '\t' running with valgrind leak check and [parameters] '\n' \
+	'\t' '\t' e.g: make valgrind -args1 := valgrind --leak-check=yes exe -arg '\n'\
+	'\t' again: '\n' \
 	'\t' '\t' cleaning and building again '\n' \
-	'\t' make clean: '\n' \
+	'\t' clean: '\n' \
 	'\t' '\t' cleaning .o and executable files '\n' \
-	'\t' make version: '\n' \
+	'\t' version: '\n' \
 	'\t' '\t' information about current makefile version '\n''\n'\
 	--------------------------------------------------------------------------
